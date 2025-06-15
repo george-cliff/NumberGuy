@@ -54,24 +54,3 @@ def convert_lab_data(lab_data):
     lab_data = lab_data[8:] #skips the first 8 bytes of the mnist lavel file as it contains header info
     lab_array = np.frombuffer(lab_data, dtype=np.uint8)
     return lab_array
-
-def plot_img(img_array):
-    import matplotlib.pyplot as plt
-    import random
-    idx = random.randint(0, len(img_array) - 1)  # random index
-    random_img = img_array[idx]                  # pick the random image
-    plt.imshow(random_img, cmap='gray')
-    plt.title(f"MNIST Image (Index: {idx})")
-    plt.axis('off')
-    plt.show()
-
-def main():
-
-    data_path = get_data_path()
-    img_data, lab_data = load_train_data(data_path)
-    img_array = convert_img_data(img_data)
-    lab_array = convert_lab_data(lab_data)
-    plot_img(img_array)
-
-if __name__ == "__main__":
-    main()

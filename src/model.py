@@ -94,8 +94,17 @@ def predict_digit(img_array, model_files):
         [f for f in os.listdir(model_path) if f.endswith(".h5")])
     model_file = os.path.join(model_path, model_files[-1])
     model = load_model(model_file)
-    prediction = model.predict(img_array)
-    predicted_digit = np.argmax(prediction)
-    digit = np.argmax(prediction)
+    prediction = model.predict(img_array)[0]
+    """
+    digit = int(np.argmax(prediction))
+    confidence = float(np.max(prediction))
     print(digit)
-    return digit
+    print(confidence)
+    """
+    digits = prediction.argsort()[::-1] #highest first
+    print(digits)
+    confidences = prediction[digits]
+    print(confidences)
+    ranking = list(zip(digits, confidences))
+    print(ranking)
+    return ranking

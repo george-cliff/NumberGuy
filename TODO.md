@@ -34,25 +34,42 @@
 
 ## 🔨 Current Tasks (In Progress / Next Steps)
 
-- [ ] **Add user feedback**
+- [x] **Add user feedback**
 
-  - [ ] Add “Yes” and “No” buttons for feedback.
-  - [ ] Log whether the prediction was correct.
-  - [ ] If "No", suggest the next highest prediction.
+  - [x] Add “Yes” and “No” buttons for feedback.
+  - [x] Log whether the prediction was correct.
+  - [x] If "No", suggest the next highest prediction.
 
-- [ ] **Handle local user data**
-  - [ ] Save user drawings and feedback locally.
-  - [ ] Organize saved data for future retraining.
-  - [ ] Delete temporary files when no longer needed.
+- [ ] **Improve GUI usability**
+
+  - [x] Add visual indicator for confidence.
+  - [ ] loading bar when generating a model
+    - [ ] Learn about Keras callbacks—create a simple callback with `on_epoch_end()` that signals when an epoch completes
+    - [ ] Add a `ttk.Progressbar` to the popup in determinate mode with max=16
+    - [ ] Set up safe communication from the background training thread to the main UI thread (via queue or popup.after())
+    - [ ] Connect the callback to update the progress bar after each epoch
+    - [ ] After training finishes, close the progress popup and show a completion message
 
 ---
 
 ## 📌 Next Tasks (After Current Stage)
 
-- [ ] **Improve GUI usability**
+- [ ] **Reorganize gui.py into a class-based design**
 
-  - [ ] Add visual indicator for confidence.
-  - [ ] loading bar when generating a model
+  - [ ] Make a new class called `NumberGuyApp` to keep all the GUI parts and data together
+  - [ ] Move the code from current `setup()` function into the class, using the `__init__` method and another setup method
+  - [ ] Change all global variables like `window`, `canvas`, and `default_font` to be part of the class as `self.window`, `self.canvas`, `self.default_font`
+  - [ ] Change the separate functions like `draw`, `btn_clear`, and `btn_submit` so they belong to the class as methods
+  - [ ] Update button commands and other calls to use the class methods with `self.method_name` instead of the old global functions
+  - [ ] Change the `popup_guess` function to be a method inside the class, so it can use the class variables easily
+  - [ ] After moving everything, test app to make sure buttons and other parts still work fine
+  - [ ] Add docustrings inside class and methods to help understand what each part does
+
+- [ ] **Handle local user data**
+
+  - [ ] Save user drawings and feedback locally.
+  - [ ] Organize saved data for future retraining.
+  - [ ] Delete temporary files when no longer needed.
 
 - [ ] **documentation**
 

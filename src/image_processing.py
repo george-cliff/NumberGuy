@@ -13,9 +13,18 @@ def prepare_image():
     res = cv2.resize(img, dsize=(28, 28), interpolation=cv2.INTER_LINEAR)
     res_file = os.path.join(img_path, "res.png")
     cv2.imwrite(res_file, res)
+    print(" image saved to temp/res.png")
     f = Image.open(res_file)
     img_array = np.asarray(f)
     img_array = img_array.reshape(1, 28, 28)
     img_array = img_array.astype('float32') / 255.0
-    print(img_array)
-    return img_array
+    return img_array, img_file
+
+def confirmed_digit(digit):
+    img_path = get_temp_path()
+    res_file = os.path.join(img_path, "res.png")
+    f = Image.open(res_file)
+    img_array = np.asarray(f)
+    img_array = img_array.reshape(1, 28, 28)
+    img_array = img_array.astype('float32') / 255.0
+    print(f"{digit} is ready to be stored: {img_array}")
